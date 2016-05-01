@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: <%= ENV['retrolife_db_user'] %>
+  password: <%= ENV['retrolife_db_pass'] %>
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: retrolife_development
+
+test:
+  <<: *default
+  database: retrolife_testing
+
+production:
+  <<: *default
+  database: retrolife_production

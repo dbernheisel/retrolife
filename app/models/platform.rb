@@ -1,0 +1,5 @@
+class Platform < ApplicationRecord
+  belongs_to :platform_games
+  belongs_to :publisher
+  validates :name, presence: true, uniqueness: true
+end

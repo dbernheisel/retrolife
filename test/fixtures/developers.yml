@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  founded_on: 2016-04-30
+  disbanded_on: 2016-04-30
+
+two:
+  name: MyString
+  founded_on: 2016-04-30
+  disbanded_on: 2016-04-30
