@@ -1,0 +1,9 @@
+<h2 class="ui orange inverted header">Developers</h2>
+<div class="ui inverted segment">
+  <div class="ui inverted relaxed divided list">
+    <div class="item" *ngFor="let developer of developers">
+      {{developer.id}} - {{developer.name}}
+    </div>
+  </div>
+  <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
+</div>

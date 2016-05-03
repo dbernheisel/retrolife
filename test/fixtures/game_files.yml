@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  crc: MyString
+  md5: MyString
+  sha1: MyString
+  size: 
+  file: MyString
+
+two:
+  crc: MyString
+  md5: MyString
+  sha1: MyString
+  size: 
+  file: MyString

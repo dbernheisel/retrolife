@@ -1,0 +1,9 @@
+<h2 class="ui orange inverted header">Manufacturers</h2>
+<div class="ui inverted segment">
+  <div class="ui inverted relaxed divided list">
+    <div class="item" *ngFor="let manufacturer of manufacturers">
+      {{manufacturer.id}} - {{manufacturer.name}}
+    </div>
+  </div>
+  <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
+</div>

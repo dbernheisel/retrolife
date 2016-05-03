@@ -1,0 +1,9 @@
+<h2 class="ui orange inverted header">Publishers</h2>
+<div class="ui inverted segment">
+  <div class="ui inverted relaxed divided list">
+    <div class="item" *ngFor="let publisher of publishers">
+      {{publisher.id}} - {{publisher.name}}
+    </div>
+  </div>
+  <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
+</div>
