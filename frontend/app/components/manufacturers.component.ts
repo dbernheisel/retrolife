@@ -1,6 +1,5 @@
-import { Component, OnInit } from 'angular2/core';
-import { Router } from 'angular2/router';
-import { Http, HTTP_PROVIDERS } from 'angular2/http';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router-deprecated';
 
 import { Manufacturer } from '../models/manufacturer';
 import { ManufacturerService } from '../services/manufacturer.service';
@@ -23,8 +22,8 @@ export class ManufacturersComponent implements OnInit {
   }
 
   getManufacturers() {
-    this._manufacturerService.getManufacturers().subscribe(
-       manufacturers => this.manufacturers = manufacturers,
-       error => this.errorMessage = <any>error);
+    this._manufacturerService.getManufacturers()
+                             .then(manufacturers => this.manufacturers = manufacturers)
+                             .catch(error => this.errorMessage = error);
   }
 }

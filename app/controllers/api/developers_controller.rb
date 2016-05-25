@@ -1,5 +1,5 @@
 module Api
-  class DevelopersController < ApplicationController
+  class DevelopersController < JSONAPI::ResourceController
     def index
       render json: Company.developers.all
     end

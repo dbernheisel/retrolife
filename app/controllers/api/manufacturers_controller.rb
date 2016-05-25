@@ -1,5 +1,5 @@
 module Api
-  class ManufacturersController < ApplicationController
+  class ManufacturersController < JSONAPI::ResourceController
     def index
       render json: Company.manufacturers.all
     end

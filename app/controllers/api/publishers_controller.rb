@@ -1,5 +1,5 @@
 module Api
-  class PublishersController < ApplicationController
+  class PublishersController < JSONAPI::ResourceController
     def index
       render json: Company.publishers.all
     end

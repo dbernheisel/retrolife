@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/cerebris/jsonapi-resources.git
+  revision: 31c13c00213aad8472d7ff4afb63d525a4ed8930
+  branch: master
+  specs:
+    jsonapi-resources (0.7.0)
+      concurrent-ruby
+      rails (>= 4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -24,10 +33,6 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    active_model_serializers (0.10.0.rc5)
-      actionpack (>= 4.0)
-      activemodel (>= 4.0)
-      railties (>= 4.0)
     activejob (5.0.0.beta4)
       activesupport (= 5.0.0.beta4)
       globalid (>= 0.3.6)
@@ -137,8 +142,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_model_serializers (~> 0.10.0.rc5)
   bcrypt (~> 3.1.7)
+  jsonapi-resources!
   listen (~> 3.0.5)
   pg
   pry-rails

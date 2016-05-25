@@ -1,6 +1,5 @@
-import { Component, OnInit } from 'angular2/core';
-import { Router } from 'angular2/router';
-import { Http, HTTP_PROVIDERS } from 'angular2/http';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router-deprecated';
 
 import { Publisher } from '../models/publisher';
 import { PublisherService } from '../services/publisher.service';
@@ -23,8 +22,8 @@ export class PublishersComponent implements OnInit {
   }
 
   getPublishers() {
-    this._publisherService.getPublishers().subscribe(
-       publishers => this.publishers = publishers,
-       error => this.errorMessage = <any>error);
+    this._publisherService.getPublishers()
+      .then(publishers => this.publishers = publishers)
+      .catch(error => this.errorMessage = error);
   }
 }

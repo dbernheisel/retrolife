@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
-    resources :publishers
-    resources :developers
-    resources :manufacturers
+    jsonapi_resources :publishers
+    jsonapi_resources :developers
+    jsonapi_resources :manufacturers
   end
 end

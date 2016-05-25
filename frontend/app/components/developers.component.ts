@@ -1,6 +1,5 @@
-import { Component, OnInit } from 'angular2/core';
-import { Router } from 'angular2/router';
-import { Http, HTTP_PROVIDERS } from 'angular2/http';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router-deprecated';
 
 import { Developer } from '../models/developer';
 import { DeveloperService } from '../services/developer.service';
@@ -23,8 +22,8 @@ export class DevelopersComponent implements OnInit {
   }
 
   getDevelopers() {
-    this._developerService.getDevelopers().subscribe(
-       developers => this.developers = developers,
-       error => this.errorMessage = <any>error);
+    this._developerService.getDevelopers()
+                          .then(developers => this.developers = developers)
+                          .catch(error => this.errorMessage = error);
   }
 }
