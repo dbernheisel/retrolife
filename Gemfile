@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '>= 5.0.0.beta4', '< 5.1'
 gem 'pg'
 gem 'puma', '~> 3.0'
-gem 'jsonapi-resources', github: 'cerebris/jsonapi-resources', branch: 'master'
+gem 'active_model_serializers', github: 'rails-api/active_model_serializers', tag: 'v0.10.0'
 
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 3.0'

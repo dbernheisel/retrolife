@@ -14,26 +14,27 @@ require('rxjs/add/operator/toPromise');
 var ManufacturerService = (function () {
     function ManufacturerService(http) {
         this.http = http;
-        this.manufacturerUrl = 'http://localhost:3000/api/manufacturers';
+        this.manufacturerUrl = 'http://localhost:3000/api/companies';
     }
     ManufacturerService.prototype.getManufacturers = function () {
-        return this.http.get(this.manufacturerUrl + ".json")
+        return this.http.get(this.manufacturerUrl + "?filter_role=manufacturer")
             .toPromise()
-            .then(function (response) { return response.json().data; })
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     ManufacturerService.prototype.getManufacturer = function (id) {
-        return this.http.get(this.manufacturerUrl + "/" + id + ".json")
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this.http.get(this.manufacturerUrl + "/" + id, { headers: headers })
             .toPromise()
-            .then(function (response) { return response.json().data; })
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     ManufacturerService.prototype.createManufacturer = function (name) {
-        var body = JSON.stringify({ manufacturer: { name: name } });
+        var body = JSON.stringify({ manufacturer: { name: name, role: 'Manufacturer' } });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        return this.http.post(this.manufacturerUrl + ".json", body, { headers: headers })
+        return this.http.post("" + this.manufacturerUrl, body, { headers: headers })
             .toPromise()
-            .then(function (response) { return response.json().data; })
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     ManufacturerService.prototype.updateManufacturer = function (manufacturer) {
@@ -45,7 +46,7 @@ var ManufacturerService = (function () {
             }
         });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        return this.http.put(this.manufacturerUrl + "/" + manufacturer.id + ".json", body, { headers: headers });
+        return this.http.put(this.manufacturerUrl + "/" + manufacturer.id, body, { headers: headers });
     };
     ManufacturerService.prototype.handleError = function (error) {
         console.log(error);

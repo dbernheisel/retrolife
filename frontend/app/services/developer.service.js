@@ -14,24 +14,24 @@ require('rxjs/add/operator/toPromise');
 var DeveloperService = (function () {
     function DeveloperService(http) {
         this.http = http;
-        this.developerUrl = 'http://localhost:3000/api/developers';
+        this.developerUrl = 'http://localhost:3000/api/companies';
     }
     DeveloperService.prototype.getDevelopers = function () {
-        return this.http.get(this.developerUrl + ".json")
+        return this.http.get(this.developerUrl + "?filter_role=developer")
             .toPromise()
             .then(function (response) { return response.json().data; })
             .catch(this.handleError);
     };
     DeveloperService.prototype.getDeveloper = function (id) {
-        return this.http.get(this.developerUrl + "/" + id + ".json")
+        return this.http.get(this.developerUrl + "/" + id)
             .toPromise()
             .then(function (response) { return response.json().data; })
             .catch(this.handleError);
     };
     DeveloperService.prototype.createDeveloper = function (name) {
-        var body = JSON.stringify({ developer: { name: name } });
-        var headers = new http_1.Headers({ 'Content-Type': 'application/vnd.api+json' });
-        return this.http.post(this.developerUrl + ".json", body, { headers: headers })
+        var body = JSON.stringify({ developer: { name: name, role: 'Developer' } });
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this.http.post("" + this.developerUrl, body, { headers: headers })
             .toPromise()
             .then(function (response) { return response.json().data; })
             .catch(this.handleError);
@@ -45,7 +45,7 @@ var DeveloperService = (function () {
             }
         });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        return this.http.put(this.developerUrl + "/" + developer.id + ".json", body, { headers: headers });
+        return this.http.put(this.developerUrl + "/" + developer.id, body, { headers: headers });
     };
     DeveloperService.prototype.handleError = function (error) {
         console.log(error);

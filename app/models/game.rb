@@ -9,4 +9,8 @@ class Game < ApplicationRecord
   has_many :videos
   has_many :music_albums
   has_many :tracks, through: :music_albums
+
+  def platforms
+    platform_games.map(&:platform).compact
+  end
 end

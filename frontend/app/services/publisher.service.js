@@ -14,26 +14,26 @@ require('rxjs/add/operator/toPromise');
 var PublisherService = (function () {
     function PublisherService(http) {
         this.http = http;
-        this.publisherUrl = 'http://localhost:3000/api/publishers';
+        this.publisherUrl = 'http://localhost:3000/api/companies';
     }
     PublisherService.prototype.getPublishers = function () {
-        return this.http.get(this.publisherUrl + ".json")
+        return this.http.get(this.publisherUrl + "?filter_role=publisher")
             .toPromise()
-            .then(function (response) { return response.json().data; })
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     PublisherService.prototype.getPublisher = function (id) {
-        return this.http.get(this.publisherUrl + "/" + id + ".json")
+        return this.http.get(this.publisherUrl + "/" + id)
             .toPromise()
-            .then(function (response) { return response.json().data; })
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     PublisherService.prototype.createPublisher = function (name) {
-        var body = JSON.stringify({ publisher: { name: name } });
+        var body = JSON.stringify({ company: { name: name, role: 'Publisher' } });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        return this.http.post(this.publisherUrl + ".json", body, { headers: headers })
+        return this.http.post(this.publisherUrl, body, { headers: headers })
             .toPromise()
-            .then(function (response) { return response.json().data; })
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     PublisherService.prototype.updatePublisher = function (publisher) {
@@ -45,7 +45,7 @@ var PublisherService = (function () {
             }
         });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        return this.http.put(this.publisherUrl + "/" + publisher.id + ".json", body, { headers: headers });
+        return this.http.put(this.publisherUrl + "/" + publisher.id, body, { headers: headers });
     };
     PublisherService.prototype.handleError = function (error) {
         console.log(error);

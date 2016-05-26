@@ -7,32 +7,33 @@ import { Manufacturer } from '../models/manufacturer';
 @Injectable()
 
 export class ManufacturerService {
-  private manufacturerUrl = 'http://localhost:3000/api/manufacturers';
+  private manufacturerUrl = 'http://localhost:3000/api/companies';
 
   constructor(private http: Http) { }
 
   getManufacturers(): Promise<Manufacturer[]> {
-    return this.http.get(`${this.manufacturerUrl}.json`)
+    return this.http.get(`${this.manufacturerUrl}?filter_role=manufacturer`)
       .toPromise()
-      .then(response => response.json().data)
+      .then(response => response.json())
       // .do(data => console.log(data))
       .catch(this.handleError);
   }
 
   getManufacturer(id: number): Promise<Manufacturer> {
-    return this.http.get(`${this.manufacturerUrl}/${id}.json`)
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    return this.http.get(`${this.manufacturerUrl}/${id}`, { headers: headers })
       .toPromise()
-      .then(response => response.json().data)
+      .then(response => response.json())
       // .do(data => console.log(data))
       .catch(this.handleError);
   }
 
   createManufacturer(name: string): Promise<Manufacturer> {
-    let body = JSON.stringify({ manufacturer: { name: name } });
-    let headers = new Headers({ 'Content-Type': 'application/vnd.api+json' });
-    return this.http.post(`${this.manufacturerUrl}.json`, body, { headers: headers })
+    let body = JSON.stringify({ manufacturer: { name: name, role: 'Manufacturer' } });
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    return this.http.post(`${this.manufacturerUrl}`, body, { headers: headers })
       .toPromise()
-      .then(response => response.json().data)
+      .then(response => response.json())
       .catch(this.handleError)
   }
 
@@ -45,7 +46,7 @@ export class ManufacturerService {
       }
     });
     let headers = new Headers({ 'Content-Type': 'application/json' });
-    return this.http.put(`${this.manufacturerUrl}/${manufacturer.id}.json`, body, { headers: headers })
+    return this.http.put(`${this.manufacturerUrl}/${manufacturer.id}`, body, { headers: headers })
   }
 
   private handleError(error: any) {

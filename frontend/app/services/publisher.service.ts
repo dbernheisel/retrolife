@@ -7,32 +7,32 @@ import { Publisher } from '../models/publisher';
 @Injectable()
 
 export class PublisherService {
-  private publisherUrl = 'http://localhost:3000/api/publishers';
+  private publisherUrl = 'http://localhost:3000/api/companies';
 
   constructor(private http: Http) { }
 
   getPublishers(): Promise<Publisher[]> {
-    return this.http.get(`${this.publisherUrl}.json`)
+    return this.http.get(`${this.publisherUrl}?filter_role=publisher`)
       .toPromise()
-      .then(response => response.json().data)
+      .then(response => response.json())
       // .do(data => console.log(data))
       .catch(this.handleError);
   }
 
   getPublisher(id: number): Promise<Publisher> {
-    return this.http.get(`${this.publisherUrl}/${id}.json`)
+    return this.http.get(`${this.publisherUrl}/${id}`)
       .toPromise()
-      .then(response => response.json().data)
+      .then(response => response.json())
       // .do(data => console.log(data))
       .catch(this.handleError);
   }
 
   createPublisher(name: string): Promise<Publisher> {
-    let body = JSON.stringify({ publisher: { name: name } });
-    let headers = new Headers({ 'Content-Type': 'application/vnd.api+json' });
-    return this.http.post(`${this.publisherUrl}.json`, body, { headers: headers })
+    let body = JSON.stringify({ company: { name: name, role: 'Publisher' } });
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    return this.http.post(this.publisherUrl, body, { headers: headers })
       .toPromise()
-      .then(response => response.json().data)
+      .then(response => response.json())
       .catch(this.handleError)
   }
 
@@ -45,7 +45,7 @@ export class PublisherService {
       }
     });
     let headers = new Headers({ 'Content-Type': 'application/json' });
-    return this.http.put(`${this.publisherUrl}/${publisher.id}.json`, body, { headers: headers })
+    return this.http.put(`${this.publisherUrl}/${publisher.id}`, body, { headers: headers })
   }
 
   private handleError(error: any) {

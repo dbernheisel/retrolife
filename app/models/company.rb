@@ -1,6 +1,7 @@
 class Company < ApplicationRecord
   has_many :company_games
   has_many :company_roles
+  has_many :platforms
   has_many :roles, through: :company_roles
   has_many :games, through: :company_games
 

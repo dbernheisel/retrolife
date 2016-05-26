@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160501062045) do
+ActiveRecord::Schema.define(version: 20160526020058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,6 +85,15 @@ ActiveRecord::Schema.define(version: 20160501062045) do
     t.index ["game_id"], name: "index_music_albums_on_game_id", using: :btree
   end
 
+  create_table "platform_games", force: :cascade do |t|
+    t.integer  "game_id"
+    t.integer  "platform_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["game_id"], name: "index_platform_games_on_game_id", using: :btree
+    t.index ["platform_id"], name: "index_platform_games_on_platform_id", using: :btree
+  end
+
   create_table "platforms", force: :cascade do |t|
     t.string   "name"
     t.integer  "company_id"
@@ -143,6 +152,8 @@ ActiveRecord::Schema.define(version: 20160501062045) do
   add_foreign_key "game_genres", "games"
   add_foreign_key "game_genres", "genres"
   add_foreign_key "music_albums", "games"
+  add_foreign_key "platform_games", "games"
+  add_foreign_key "platform_games", "platforms"
   add_foreign_key "platforms", "companies"
   add_foreign_key "reviews", "games"
   add_foreign_key "screenshots", "games"
